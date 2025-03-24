@@ -2,7 +2,7 @@
 
 This is a **prototype** of a coffee shop website, designed as a portfolio project. It does not represent a real business but serves as a demonstration of **web development and design skills**.
 
-🔗 **[View the live demo](#)** (Soon to be hosted)
+🔗 **[View the live demo](https://coffeeshop-website-nine.vercel.app)**
 
 ---
 
