@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -231,13 +232,21 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section
+      <motion.section
         id="home"
         className="min-h-screen hero-pattern flex items-center relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-mocha-900/5 to-transparent"></div>
         <div className="container mx-auto px-4 md:px-6 py-20 relative">
-          <div className="flex flex-col md:flex-row items-center">
+          <motion.div
+            className="flex flex-col md:flex-row items-center"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
             <div className="md:w-1/2 mb-10 md:mb-0">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-mocha-900 leading-tight">
                 Crafting Perfect <span className="text-mocha-700">Coffee</span>{" "}
@@ -248,46 +257,74 @@ function App() {
                 pastries, and warm community vibes.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <button
+                <motion.button
                   onClick={() => scrollToSection("menu")}
                   className="px-6 py-3 bg-mocha-700 text-cream-50 rounded-md hover:bg-mocha-800 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   View Menu
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   onClick={() => scrollToSection("contact")}
                   className="px-6 py-3 border-2 border-mocha-700 text-mocha-700 rounded-md hover:bg-mocha-50 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Find Us
-                </button>
+                </motion.button>
               </div>
             </div>
             <div className="md:w-1/2">
-              <div className="relative">
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
                 <div className="absolute inset-0 bg-mocha-700/10 rounded-lg"></div>
                 <img
                   src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                   alt="Coffee shop atmosphere"
                   className="rounded-lg shadow-2xl w-full h-auto object-cover relative z-10 transform hover:scale-[1.02] transition-transform duration-300"
                 />
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* About Section */}
-      <section id="about" className="py-20 about-pattern">
+      <motion.section
+        id="about"
+        className="py-20 about-pattern"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-mocha-900">
               Our Story
             </h2>
             <div className="w-24 h-1 bg-mocha-700 mx-auto mt-4"></div>
-          </div>
+          </motion.div>
 
           <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+            <motion.div
+              className="md:w-1/2 mb-8 md:mb-0 md:pr-8"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="relative">
                 <div className="absolute inset-0 bg-mocha-700/10 rounded-lg transform rotate-3"></div>
                 <img
@@ -296,8 +333,14 @@ function App() {
                   className="rounded-lg shadow-2xl w-full h-auto object-cover relative z-10 transform -rotate-3 hover:rotate-0 transition-transform duration-300"
                 />
               </div>
-            </div>
-            <div className="md:w-1/2">
+            </motion.div>
+            <motion.div
+              className="md:w-1/2"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <h3 className="text-2xl font-serif font-semibold text-mocha-800 mb-4">
                 From Bean to Cup
               </h3>
@@ -316,45 +359,28 @@ function App() {
                 neighbors become friends, ideas are exchanged, and everyone
                 feels at home.
               </p>
-
-              <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-cream-100/80 backdrop-blur-sm p-6 rounded-lg shadow-lg transform hover:-translate-y-1 transition-transform duration-300">
-                  <Coffee className="h-10 w-10 text-mocha-700 mb-4" />
-                  <h4 className="font-serif font-semibold text-mocha-800 text-xl mb-2">
-                    Quality Beans
-                  </h4>
-                  <p className="text-mocha-600">
-                    Ethically sourced and expertly roasted for perfect flavor.
-                  </p>
-                </div>
-                <div className="bg-cream-100/80 backdrop-blur-sm p-6 rounded-lg shadow-lg transform hover:-translate-y-1 transition-transform duration-300">
-                  <Clock className="h-10 w-10 text-mocha-700 mb-4" />
-                  <h4 className="font-serif font-semibold text-mocha-800 text-xl mb-2">
-                    Crafted Slowly
-                  </h4>
-                  <p className="text-mocha-600">
-                    Each cup prepared with patience and precision.
-                  </p>
-                </div>
-                <div className="bg-cream-100/80 backdrop-blur-sm p-6 rounded-lg shadow-lg transform hover:-translate-y-1 transition-transform duration-300">
-                  <MapPin className="h-10 w-10 text-mocha-700 mb-4" />
-                  <h4 className="font-serif font-semibold text-mocha-800 text-xl mb-2">
-                    Local Heart
-                  </h4>
-                  <p className="text-mocha-600">
-                    Deeply rooted in our community and culture.
-                  </p>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Menu Section */}
-      <section id="menu" className="py-20 menu-pattern">
+      <motion.section
+        id="menu"
+        className="py-20 menu-pattern"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-mocha-900">
               Our Menu
             </h2>
@@ -363,13 +389,20 @@ function App() {
               Discover our selection of handcrafted beverages and freshly baked
               goods, made with love and the finest ingredients.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             {menuItems.map((category, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="bg-cream-100/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300"
+                whileHover={{ scale: 1.05 }}
               >
                 <div className="bg-mocha-700 py-4 px-6">
                   <h3 className="text-xl font-serif font-semibold text-cream-50">
@@ -400,57 +433,35 @@ function App() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-
-          <div className="mt-16">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-serif font-semibold text-mocha-900">
-                Frequently Asked Questions
-              </h3>
-            </div>
-
-            <div className="max-w-3xl mx-auto">
-              {faqs.map((faq, index) => (
-                <div key={index} className="mb-4">
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full flex justify-between items-center bg-cream-100/90 backdrop-blur-sm p-4 rounded-lg shadow-md hover:bg-cream-200/90 transition-colors"
-                  >
-                    <span className="font-medium text-mocha-800">
-                      {faq.question}
-                    </span>
-                    {expandedFaq === index ? (
-                      <ChevronUp className="h-5 w-5 text-mocha-700" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-mocha-700" />
-                    )}
-                  </button>
-                  {expandedFaq === index && (
-                    <div className="bg-cream-50/90 backdrop-blur-sm p-4 rounded-b-lg shadow-md border-t border-mocha-200">
-                      <p className="text-mocha-700">{faq.answer}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 contact-pattern">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-mocha-900">
               Visit Us
             </h2>
             <div className="w-24 h-1 bg-mocha-700 mx-auto mt-4"></div>
-          </div>
+          </motion.div>
 
           <div className="flex flex-col lg:flex-row">
-            <div className="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+            <motion.div
+              className="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="bg-cream-100/90 backdrop-blur-sm p-8 rounded-lg shadow-xl transform hover:-translate-y-1 transition-transform duration-300">
                 <h3 className="text-2xl font-serif font-semibold text-mocha-800 mb-6">
                   Get In Touch
@@ -495,37 +506,51 @@ function App() {
                 <div className="mt-8">
                   <h4 className="font-medium text-mocha-800 mb-4">Follow Us</h4>
                   <div className="flex space-x-4">
-                    <a
+                    <motion.a
                       href="#"
                       className="p-2 bg-mocha-700 text-cream-50 rounded-full hover:bg-mocha-800 transition-colors transform hover:scale-110"
+                      whileHover={{ scale: 1.2 }}
                     >
                       <Instagram className="h-5 w-5" />
-                    </a>
-                    <a
+                    </motion.a>
+                    <motion.a
                       href="#"
                       className="p-2 bg-mocha-700 text-cream-50 rounded-full hover:bg-mocha-800 transition-colors transform hover:scale-110"
+                      whileHover={{ scale: 1.2 }}
                     >
                       <Facebook className="h-5 w-5" />
-                    </a>
-                    <a
+                    </motion.a>
+                    <motion.a
                       href="#"
                       className="p-2 bg-mocha-700 text-cream-50 rounded-full hover:bg-mocha-800 transition-colors transform hover:scale-110"
+                      whileHover={{ scale: 1.2 }}
                     >
                       <Twitter className="h-5 w-5" />
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="lg:w-1/2">
+            <motion.div
+              className="lg:w-1/2"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="bg-cream-100/90 backdrop-blur-sm p-8 rounded-lg shadow-xl h-full transform hover:-translate-y-1 transition-transform duration-300">
                 <h3 className="text-2xl font-serif font-semibold text-mocha-800 mb-6">
                   Send Us a Message
                 </h3>
 
                 <form className="space-y-6">
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
                     <label htmlFor="name" className="block text-mocha-700 mb-2">
                       Name
                     </label>
@@ -535,9 +560,14 @@ function App() {
                       className="w-full px-4 py-2 bg-cream-50/50 border border-mocha-300 rounded-md focus:outline-none focus:ring-2 focus:ring-mocha-500 focus:border-transparent"
                       placeholder="Your name"
                     />
-                  </div>
+                  </motion.div>
 
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
                     <label
                       htmlFor="email"
                       className="block text-mocha-700 mb-2"
@@ -550,27 +580,34 @@ function App() {
                       className="w-full px-4 py-2 bg-cream-50/50 border border-mocha-300 rounded-md focus:outline-none focus:ring-2 focus:ring-mocha-500 focus:border-transparent"
                       placeholder="Your email"
                     />
-                  </div>
+                  </motion.div>
 
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
                     <textarea
                       id="message"
                       rows={4}
                       className="w-full px-4 py-2 bg-cream-50/50 border border-mocha-300 rounded-md focus:outline-none focus:ring-2 focus:ring-mocha-500 focus:border-transparent"
                       placeholder="Your message"
                     ></textarea>
-                  </div>
+                  </motion.div>
 
-                  <button
+                  <motion.button
                     type="button"
                     className="px-6 py-3 bg-mocha-700 text-cream-50 rounded-md hover:bg-mocha-800 transition-colors font-medium w-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                     onClick={() => alert("Message sent! (This is a demo)")}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     Send Message
-                  </button>
+                  </motion.button>
                 </form>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
