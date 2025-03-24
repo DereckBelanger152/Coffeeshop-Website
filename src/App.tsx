@@ -9,8 +9,6 @@ import {
   Twitter,
   Menu,
   X,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import { motion } from "framer-motion"; // Import Framer Motion
 
@@ -456,13 +454,13 @@ function App() {
 
           <div className="flex flex-col lg:flex-row">
             <motion.div
-              className="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10"
+              className="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10 h-100"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="bg-cream-100/90 backdrop-blur-sm p-8 rounded-lg shadow-xl transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="bg-cream-100/90 backdrop-blur-sm p-8 rounded-lg shadow-xl h-full transform hover:-translate-y-1 transition-transform duration-300">
                 <h3 className="text-2xl font-serif font-semibold text-mocha-800 mb-6">
                   Get In Touch
                 </h3>
@@ -533,7 +531,7 @@ function App() {
             </motion.div>
 
             <motion.div
-              className="lg:w-1/2"
+              className="lg:w-1/2 h-full" // Added h-full for consistent height
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
